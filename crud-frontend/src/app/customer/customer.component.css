@@ -117,4 +117,9 @@ body {
 .btn-danger:hover{
   background-color: #9c2f27; 
 }
+
+.text-danger{
+  color: red;
+}
+
   
