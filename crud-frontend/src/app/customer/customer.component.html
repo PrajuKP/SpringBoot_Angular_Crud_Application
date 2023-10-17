@@ -1,16 +1,73 @@
 
 <div class="container mt-4" >
+    <div>
+        <button class="button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">+ Register Customer</button>
+        
+        <div id="id01" class="modal">
+          <form [formGroup]="customerForm" (ngSubmit)="save()" class="modal-content animate">
+            <div>
+              <h2 style="text-align: center;">Customer Registation</h2>
+              <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            
+            <table class="table">
+              <div class="form-group">
+                <tr>
+                  <th style="width: 250px; border-radius: 50px; background-color: white;"><label style="font-size: 20px;">Name</label><span style="color: red;"> * </span></th>
+                  <td>
+                    <input type="text" style="width: 470px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="customername" required>
+                    <div *ngIf="customerForm.get('customername').invalid && customerForm.get('customername').touched" class="text-danger">Name is required.</div>
+                  </td>
+                </tr>
+              </div>
 
-    <div class="card">
-        <h1>Customer Registation</h1>
+              <div class="form-group">
+                <tr>
+                  <th style="width: 250px; border-radius: 50px;background-color: white;"><label style="font-size: 20px;">Address</label><span style="color: red;"> * </span></th>
+                  <td>
+                    <input type="text" style="width: 470px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="customeraddress" required>
+                    <div *ngIf="customerForm.get('customeraddress').invalid && customerForm.get('customeraddress').touched" class="text-danger">Address is required.</div>
+                  </td>
+                </tr>
+              </div>
 
-        <form [formGroup]="customerForm" (ngSubmit)="save()">
+              <div class="form-group">
+                <tr>
+                  <th style="width: 250px; border-radius: 50px;background-color: white;"><label style="font-size: 20px;">Mobile</label><span style="color: red;"> * </span></th>
+                  <td>
+                    <input type="number" style="width: 470px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="mobile" required>
+                    <div *ngIf="customerForm.get('mobile').invalid && customerForm.get('mobile').touched" class="text-danger">Valid mobile number is required.</div>
+                  </td>
+                </tr>
+              </div>
+
+              <p style="color: red; text-align:center">ALL * MARKED FIELDS ARE REQUIRED</p>
+
+              <div class="form-group" style="align-items: center; justify-content: center;display: flex;">
+                <button type="submit" class="btn btn-primary mt-4" style="width: 500px; border: 1px solid #c4c3bc; height: 40px; font-size: 20px; align-items: center; justify-content: center;">Save</button>
+              </div>
+            </table>
+          </form>
+        </div>
+
+          <script>
+            var modal = document.getElementById('id01');
+            window.onclick = function(event) 
+            {
+              if (event.target == modal) 
+              {
+                modal.style.display = "none";
+              }
+            }
+          </script>
+          
+        <!-- <form [formGroup]="customerForm" (ngSubmit)="save()">
           <table class="table">
             <div class="form-group">
               <tr>
-                <th style="width: 800px;border-radius: 50px; background-color: white;"><label style="font-size: 20px;">Name</label><span style="color: red;"> * </span></th>
-                <td style="width: 800px;">
-                  <input type="text" style="width: 800px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="customername" required>
+                <th style="width: 250px; border-radius: 50px; background-color: white;"><label style="font-size: 20px;">Name</label><span style="color: red;"> * </span></th>
+                <td>
+                  <input type="text" style="width: 470px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="customername" required>
                   <div *ngIf="customerForm.get('customername').invalid && customerForm.get('customername').touched" class="text-danger">Name is required.</div>
                 </td>
               </tr>
@@ -18,9 +75,9 @@
 
             <div class="form-group">
               <tr>
-                <th style="width: 800px;border-radius: 50px;background-color: white;"><label style="font-size: 20px;">Address</label><span style="color: red;"> * </span></th>
-                <td style="width: 800px;">
-                  <input type="text" style="width: 800px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="customeraddress" required>
+                <th style="width: 250px; border-radius: 50px;background-color: white;"><label style="font-size: 20px;">Address</label><span style="color: red;"> * </span></th>
+                <td>
+                  <input type="text" style="width: 470px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="customeraddress" required>
                   <div *ngIf="customerForm.get('customeraddress').invalid && customerForm.get('customeraddress').touched" class="text-danger">Address is required.</div>
                 </td>
               </tr>
@@ -28,9 +85,9 @@
 
             <div class="form-group">
               <tr>
-                <th style="width: 800px;border-radius: 50px;background-color: white;"><label style="font-size: 20px;">Mobile</label><span style="color: red;"> * </span></th>
-                <td style="width: 800px;">
-                  <input type="number" style="width: 800px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="mobile" required>
+                <th style="width: 250px; border-radius: 50px;background-color: white;"><label style="font-size: 20px;">Mobile</label><span style="color: red;"> * </span></th>
+                <td>
+                  <input type="number" style="width: 470px; border: 1px solid #c4c3bc; font-size: 20px; border-radius: 50px;" formControlName="mobile" required>
                   <div *ngIf="customerForm.get('mobile').invalid && customerForm.get('mobile').touched" class="text-danger">Valid mobile number is required.</div>
                 </td>
               </tr>
@@ -40,45 +97,43 @@
 
             <button type="submit" class="btn btn-primary mt-4" style="width: 500px; border: 1px solid #c4c3bc; height: 40px; font-size: 20px;">Save</button>
           </table>
-        </form>
+        </form> -->
       </div>
-
-<div>
-
-      <div class="card">
-        <div class="container mt-4" >
-
+      
+      <div>
+        <div>
+          <div class="container mt-4" >
             <h1>Customer Table</h1>
 
-          <table class="table">
-            <thead>
-
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Mobile</th>
-                <th scope="col">Option</th>
-            </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let CustomerItem of CustomerArray">
-
-                <th scope="row">{{CustomerItem.customerid  }}</th>
-                <td>{{CustomerItem.customername  | uppercase}}</td>
-                <td>{{CustomerItem.customeraddress  | uppercase }}</td>
-                <td>{{CustomerItem.mobile }}</td>
-
-                <td>
-                  <button type="button" class="btn btn-success" (click)="setUpdate(CustomerItem)">Edit</button>
-
-                  <button type="button" class="btn btn-danger" (click)="setDelete(CustomerItem)">Delete</button>
-
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Mobile</th>
+                  <th scope="col">Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let CustomerItem of CustomerArray">
+                  <th scope="row">{{CustomerItem.customerid  }}</th>
+                  <td>{{CustomerItem.customername  | uppercase}}</td>
+                  <td>{{CustomerItem.customeraddress  | uppercase }}</td>
+                  <td>{{CustomerItem.mobile }}</td>
+                  <td>
+                    <button type="button" class="btn btn-success" (click)="setUpdate(CustomerItem) ">Edit</button>
+                    <button type="button" class="btn btn-danger" (click)="setDelete(CustomerItem)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 </div>
+
+
+
+
+

@@ -12,14 +12,18 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MainCustomerComponent } from './main-customer/main-customer.component';
+import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerComponent
+    CustomerComponent,
+    MainCustomerComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,9 +31,12 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
-    // NzTableModule,
-    // NzButtonModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot([
+      {path: 'home', component: HomeComponent},
+      {path: 'customer', component: CustomerComponent},
+      {path: '', redirectTo: '/home', pathMatch: 'full'},
+    ]),
     
   ],
   providers: [
