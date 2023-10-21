@@ -9,20 +9,50 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit{
 
   totalCustomers: number = 0;
-  error: string ='';
-  // customerid: number =0;
+  error: string = '';
+  baseUrl = '';
+  response: any;
+  recentCustomer:any;
+  recentCustomerAddress:any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.baseUrl = 'http://localhost:8084';
+  }
 
   ngOnInit(): void {
-    this.http.get<number>('api/v1/customer/getAllCustomer').subscribe({
-      next: (totalCustomers) => {
-        this.totalCustomers = totalCustomers;
-      },
-      error: (error) => {
-        this.error = 'Error fetching total customers: ' + error;
-      }
-    });
+    this.http.get<any>(this.baseUrl+"/api/v1/customer/getAllCustomerCount").subscribe({
+  next: (response) => {
+    this.totalCustomers = response.length; 
+  },
+  error: (error) => {
+    this.error = 'Error fetching total customers: ' + error;
   }
-  
+});
+
+
+this.http.get<any>(this.baseUrl+"/api/v1/customer/getAllCustomer").subscribe({
+  next: (response) => {
+    if (response && response.length > 0) {
+      this.recentCustomer = response[response.length - 1].customerid;
+    } 
+  },
+  error: (error) => {
+    this.error = 'Error fetching total customers: ' + error;
+  }
+});
+
+
+this.http.get<any>(this.baseUrl+"/api/v1/customer/getAllCustomer").subscribe({
+  next: (response) => {
+    if (response && response.length > 0) {
+      this.recentCustomerAddress = response[response.length - 1].customeraddress;
+    } 
+  },
+  error: (error) => {
+    this.error = 'Error fetching total customers: ' + error;
+  }
+});
+
+
+  }
 }

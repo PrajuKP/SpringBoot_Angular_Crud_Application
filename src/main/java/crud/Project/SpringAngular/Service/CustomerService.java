@@ -14,4 +14,6 @@ public interface CustomerService {
     String updateCustomer(CustomerUpdateDTO customerUpdateDTO);
 
     boolean deleteCustomer(int id);
+
+    List<CustomerDTO> getAllCustomerCount();
 }

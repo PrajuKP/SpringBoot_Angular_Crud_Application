@@ -48,6 +48,7 @@ public class CustomerServiceIMPL implements CustomerService{
         return customerDTOList;
     }
 
+
     @Override
     public String updateCustomer(CustomerUpdateDTO customerUpdateDTO) {
         if (customerRepo.existsById(customerUpdateDTO.getCustomerid())) {
@@ -77,6 +78,23 @@ public class CustomerServiceIMPL implements CustomerService{
             System.out.println("Customer id not found");
         }
         return true;
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomerCount() {
+        List<Customer> getCustomers = customerRepo.findAll();
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+        for(Customer a:getCustomers)
+        {
+            CustomerDTO customerDTO = new CustomerDTO(
+                    a.getCustomerid(),
+                    a.getCustomername(),
+                    a.getCustomeraddress(),
+                    a.getMobile()
+            );
+            customerDTOList.add(customerDTO);
+        }
+        return customerDTOList;
     }
 }
 

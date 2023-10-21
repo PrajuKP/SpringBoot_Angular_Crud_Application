@@ -35,6 +35,13 @@ public class CustomerController {
         return allCustomers;
     }
 
+    @GetMapping(path = "/getAllCustomerCount")
+    public List<CustomerDTO> getAllCustomerCount()
+    {
+        List<CustomerDTO>allCustomers = customerService.getAllCustomerCount();
+        return allCustomers;
+    }
+
     @PutMapping(path = "/update")
     public String updateCustomer(@RequestBody CustomerUpdateDTO customerUpdateDTO)
     {

@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainCustomerComponent } from './main-customer/main-customer.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 registerLocaleData(en);
 
@@ -24,6 +26,8 @@ registerLocaleData(en);
     CustomerComponent,
     MainCustomerComponent,
     HomeComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ registerLocaleData(en);
     RouterModule.forRoot([
       {path: 'home', component: HomeComponent},
       {path: 'customer', component: CustomerComponent},
-      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent},
+      {path: '', redirectTo: '/login', pathMatch: 'full'},
     ]),
     
   ],
