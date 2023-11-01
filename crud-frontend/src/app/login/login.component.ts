@@ -24,21 +24,21 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
   }
- 
+
   Login() 
   {
     if (this.customerForm.valid) {
     console.log(this.email);
     console.log(this.password);
- 
+
     const bodyData = {
       "email": this.customerForm.get('email').value,
       "password": this.customerForm.get('password').value,
     };
- 
+
         this.http.post("http://localhost:8084/api/v1/employee/login", bodyData).subscribe(  (resultData: any) => {
         console.log(resultData);
- 
+
         if (resultData.message == "Email not exits")
         {
           alert("Email not exits");

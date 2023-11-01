@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 
 @Service
 public class EmployeeIMPL implements EmployeeService{
@@ -19,13 +17,17 @@ public class EmployeeIMPL implements EmployeeService{
     private EmployeeRepo employeeRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private CharSequence newPassword;
+
     @Override
     public String addEmployee(EmployeeDTO employeeDTO) {
+        String encodedPassword = passwordEncoder.encode(employeeDTO.getPassword());
+
         Employee employee = new Employee(
                 employeeDTO.getEmployeeid(),
                 employeeDTO.getEmployeename(),
                 employeeDTO.getEmail(),
-                this.passwordEncoder.encode(employeeDTO.getPassword())
+                encodedPassword
         );
         employeeRepo.save(employee);
         return employee.getEmployeename();
@@ -33,24 +35,43 @@ public class EmployeeIMPL implements EmployeeService{
     EmployeeDTO employeeDTO;
     @Override
     public LoginResponse loginEmployee(LoginDTO loginDTO) {
-        String msg = "";
-        Employee employee1 = employeeRepo.findByEmail(loginDTO.getEmail());
-        if (employee1 != null) {
-            String password = loginDTO.getPassword();
-            String encodedPassword = employee1.getPassword();
-            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
-            if (isPwdRight) {
-                Optional<Employee> employee = employeeRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
-                if (employee.isPresent()) {
-                    return new LoginResponse("Login Success", true);
-                } else {
-                    return new LoginResponse("Login Failed", false);
-                }
+        EmployeeDTO existEmployee = findEmployeeByEmail(loginDTO.getEmail());
+
+        if (existEmployee == null) {
+            return new LoginResponse("Email not exists");
+        } else {
+            boolean isPasswordMatch = passwordEncoder.matches(loginDTO.getPassword(), existEmployee.getPassword());
+
+
+            if (isPasswordMatch) {
+                return new LoginResponse("Login Success");
             } else {
-                return new LoginResponse("password Not Match", false);
+                return new LoginResponse("Password Not Match");
             }
-        }else {
-            return new LoginResponse("Email not exits", false);
         }
+    }
+
+    @Override
+    public String updateEmployee(EmployeeDTO employee) {
+        String encodedPassword = passwordEncoder.encode(employee.getPassword());
+
+        Employee existingEmployee = new Employee(employee.getEmployeeid(),employee.getEmployeename(),employee.getEmail(),encodedPassword);
+        employeeRepo.save(existingEmployee);
+        return "Password updated successfully";
+    }
+
+
+
+    @Override
+    public EmployeeDTO findEmployeeById() {
+        return null;
+    }
+
+    @Override
+    public EmployeeDTO findEmployeeByEmail(String email) {
+        Employee employee = employeeRepo.findByEmail(email);
+        return employee != null ?
+                new EmployeeDTO(employee.getEmployeeid(), employee.getEmployeename(), employee.getEmail(), employee.getPassword()) :
+                null;
     }
 }

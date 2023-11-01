@@ -56,4 +56,8 @@ public class EmployeeDTO {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+
+    public void setNewPassword(String newPassword) {
+    }
 }

@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ResetComponent } from './reset/reset.component';
 
 registerLocaleData(en);
 
@@ -28,6 +29,7 @@ registerLocaleData(en);
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    ResetComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,8 @@ registerLocaleData(en);
       {path: 'customer', component: CustomerComponent},
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
+      {path: 'reset', component: ResetComponent},
+      // {path: 'main', component: MainCustomerComponent},
       {path: '', redirectTo: '/login', pathMatch: 'full'},
     ]),
     

@@ -7,4 +7,10 @@ import crud.Project.SpringAngular.Response.LoginResponse;
 public interface EmployeeService {
     String addEmployee(EmployeeDTO employeeDTO);
     LoginResponse loginEmployee(LoginDTO loginDTO);
+
+    String updateEmployee(EmployeeDTO employee);
+
+    EmployeeDTO findEmployeeById();
+
+    EmployeeDTO findEmployeeByEmail(String email);
 }

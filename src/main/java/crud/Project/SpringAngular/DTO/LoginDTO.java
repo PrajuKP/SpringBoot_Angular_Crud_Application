@@ -36,4 +36,7 @@ public class LoginDTO {
                 '}';
     }
 
+//    public String getResetToken() {
+//        return null;
+//    }
 }

@@ -56,8 +56,13 @@
   .button:hover {
     background-color: #0056b3;
   }
+
+.logout-button {
+  background-color: red;
+  color: white;
+}
+
   
-  /* Responsive design for smaller screens */
   @media (max-width: 768px) {
     .container {
       max-width: 100%;

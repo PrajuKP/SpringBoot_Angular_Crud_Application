@@ -14,6 +14,8 @@ export class RegisterComponent {
   password: string ="";
 
   customerForm:FormGroup | any;
+  registrationSuccess: boolean = false;
+
 
 
 
@@ -42,6 +44,7 @@ export class RegisterComponent {
     {
         console.log(resultData);
         alert("Employee Registered Successfully");
+        this.registrationSuccess = true;
         this.customerForm.reset();
     });
 

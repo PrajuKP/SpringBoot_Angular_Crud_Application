@@ -1,8 +1,8 @@
 package crud.Project.SpringAngular.Entity;
 
 
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 @Entity
 @Table(name="employee")
 public class Employee {
@@ -71,5 +71,10 @@ public class Employee {
     }
 
 
+    public String getNewPassword() {
+        return null;
+    }
 
+    public void setNewPassword(String encode) {
+    }
 }
